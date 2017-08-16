@@ -19,8 +19,13 @@ export class PostComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.id = this.ActivatedRoute.snapshot.params['id'];
-        this.data = this.dataService.getPost(this.id);
+        this.id = +this.ActivatedRoute.snapshot.params['id'];
+
+        if (Number.isInteger(this.id)) {
+            this.data = this.dataService.getPost(this.id);
+        } else {
+            this.gotoPosts();
+        }
     }
 
     gotoPosts() {

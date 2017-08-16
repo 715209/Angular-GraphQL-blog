@@ -1,0 +1,8 @@
+<button type="button" (click)="gotoPosts()">Back</button>
+
+<div *ngIf="data | async as post;else loading">
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.author.username }} - {{ post.createdAt }}</p>
+  <p>{{ post.body }}</p>
+</div>
+<ng-template #loading>Loading</ng-template>

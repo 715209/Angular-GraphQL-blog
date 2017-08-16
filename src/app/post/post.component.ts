@@ -4,29 +4,31 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { ApolloQueryObservable } from 'apollo-angular';
 
 @Component({
-    selector: 'app-posts',
-    templateUrl: './posts.component.html',
-    styleUrls: ['./posts.component.css']
+    selector: 'app-post',
+    templateUrl: './post.component.html',
+    styleUrls: ['./post.component.css']
 })
-export class PostsComponent implements OnInit {
-    posts: ApolloQueryObservable<Post>;
+export class PostComponent implements OnInit {
+    id: number;
+    data: ApolloQueryObservable<Post>;
 
     constructor(
+        private ActivatedRoute: ActivatedRoute,
         private router: Router,
         private dataService: DataService
     ) { }
 
     ngOnInit() {
-        this.posts = this.dataService.getPosts();
+        this.id = this.ActivatedRoute.snapshot.params['id'];
+        this.data = this.dataService.getPost(this.id);
     }
 
-    onSelect(post: Post) {
-        this.router.navigate(['/', post.id]);
+    gotoPosts() {
+        this.router.navigate(['/']);
     }
 }
 
 interface Post {
-    id: number;
     title: string;
     body: string;
     createdAt: string;

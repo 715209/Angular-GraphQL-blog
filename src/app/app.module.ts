@@ -5,8 +5,14 @@ import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import { ApolloModule } from 'apollo-angular';
 
 import { AppComponent } from './app.component';
-import { PostsComponent } from './posts/posts.component';
+import { AppRoutingModule } from './app-routing.module';
+
+// Services
 import { DataService } from './services/data.service';
+
+// Components
+import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './post/post.component';
 
 // Create the client as outlined above
 const client = new ApolloClient({
@@ -22,11 +28,13 @@ export function provideClient(): ApolloClient {
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     ApolloModule.forRoot(provideClient)
   ],
   providers: [DataService],
